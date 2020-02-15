@@ -1,6 +1,6 @@
 Name:           ostree
 Version:        2019.4
-Release:        4
+Release:        5
 Summary:        A tool like git for operating system binaries
 License:        LGPLv2+
 URL:            https://ostree.readthedocs.io/en/latest/
@@ -9,7 +9,7 @@ Source0:        https://github.com/ostreedev/%{name}/releases/download/v%{versio
 BuildRequires:  bison autoconf automake libtool gobject-introspection-devel pkgconfig(liblzma)
 BuildRequires:  pkgconfig(e2p) pkgconfig(zlib) pkgconfig(libcurl) pkgconfig(libsoup-2.4) gpgme-devel
 BuildRequires:  pkgconfig(libselinux) pkgconfig(libcrypto) pkgconfig(fuse) gdb pkgconfig(libsystemd)
-BuildRequires:  dracut openssl-devel pkgconfig(mount) pkgconfig(libarchive)
+BuildRequires:  dracut openssl-devel pkgconfig(mount) pkgconfig(libarchive) python3-pyyaml
 Requires:       dracut systemd-units gnupg2
 %ifarch x86_64
 Requires: grub2
@@ -47,6 +47,9 @@ env NOCONFIGURE=1 ./autogen.sh
 %make_install
 %delete_la
 
+%check
+make check
+
 %post
 %systemd_post ostree-remount.service
  
@@ -80,6 +83,12 @@ env NOCONFIGURE=1 ./autogen.sh
 %{_datadir}/gir-1.0/*.gir
 
 %changelog
+* Tue Feb 11 2020 openEuler Buildteam <buildteam@openeuler.org> - 2019.4-5
+- Type:enhancement
+- ID:NA
+- SUG:NA
+- DESC:enable check
+
 * Sat Oct 19 2019 shenyangyang <shenyangyang4@huawei.com> - 2019.4-4
 - Type:enhancement
 - ID:NA
@@ -92,7 +101,7 @@ env NOCONFIGURE=1 ./autogen.sh
 - SUG:NA
 - DESC:add ostree-libs%{?_isa} that required by flatpak
 
-* Sat Oct 14 2019 shenyangyang <shenyangyang4@huawei.com> - 2019.4-2
+* Mon Oct 14 2019 shenyangyang <shenyangyang4@huawei.com> - 2019.4-2
 - Type: enhancement
 - ID: NA
 - SUG: NA
