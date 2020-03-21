@@ -1,15 +1,15 @@
 Name:           ostree
 Version:        2019.4
-Release:        5
+Release:        6
 Summary:        A tool like git for operating system binaries
 License:        LGPLv2+
 URL:            https://ostree.readthedocs.io/en/latest/
 Source0:        https://github.com/ostreedev/%{name}/releases/download/v%{version}/libostree-%{version}.tar.xz
 
-BuildRequires:  bison autoconf automake libtool gobject-introspection-devel pkgconfig(liblzma)
+BuildRequires:  bison autoconf automake libtool gobject-introspection-devel pkgconfig(liblzma) docbook-xsl
 BuildRequires:  pkgconfig(e2p) pkgconfig(zlib) pkgconfig(libcurl) pkgconfig(libsoup-2.4) gpgme-devel
 BuildRequires:  pkgconfig(libselinux) pkgconfig(libcrypto) pkgconfig(fuse) gdb pkgconfig(libsystemd)
-BuildRequires:  dracut openssl-devel pkgconfig(mount) pkgconfig(libarchive) python3-pyyaml
+BuildRequires:  dracut openssl-devel pkgconfig(mount) pkgconfig(libarchive) python3-pyyaml libxslt
 Requires:       dracut systemd-units gnupg2
 %ifarch x86_64
 Requires: grub2
@@ -33,6 +33,8 @@ Requires: %{name} = %{version}-%{release}
 
 %description devel
 The %{name}-devel package includes the header files for the %{name} library.
+
+%package_help
 
 %prep
 %autosetup -n lib%{name}-%{version} -p1
@@ -82,7 +84,16 @@ make check
 %{_libdir}/pkgconfig/*
 %{_datadir}/gir-1.0/*.gir
 
+%files help
+%{_mandir}/man*/{ostree,rofiles}*.gz
+
 %changelog
+* Sat Mar 21 2020 openEuler Buildteam <buildteam@openeuler.org> - 2019.4-6
+- Type:enhancement
+- ID:NA
+- SUG:NA
+- DESC:add man files into help package
+
 * Tue Feb 11 2020 openEuler Buildteam <buildteam@openeuler.org> - 2019.4-5
 - Type:enhancement
 - ID:NA
