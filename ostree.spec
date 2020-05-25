@@ -1,6 +1,6 @@
 Name:           ostree
 Version:        2019.4
-Release:        6
+Release:        7
 Summary:        A tool like git for operating system binaries
 License:        LGPLv2+
 URL:            https://ostree.readthedocs.io/en/latest/
@@ -88,6 +88,9 @@ make check
 %{_mandir}/man*/{ostree,rofiles}*.gz
 
 %changelog
+* Mon May 25 2020 wangchen <wangchen137@huawei.com> - 2019.4-7
+- rebuild for ostree
+
 * Sat Mar 21 2020 openEuler Buildteam <buildteam@openeuler.org> - 2019.4-6
 - Type:enhancement
 - ID:NA
