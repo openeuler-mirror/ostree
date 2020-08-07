@@ -1,15 +1,15 @@
 Name:           ostree
-Version:        2019.4
-Release:        4
+Version:        2020.4
+Release:        1
 Summary:        A tool like git for operating system binaries
 License:        LGPLv2+
 URL:            https://ostree.readthedocs.io/en/latest/
 Source0:        https://github.com/ostreedev/%{name}/releases/download/v%{version}/libostree-%{version}.tar.xz
 
-BuildRequires:  bison autoconf automake libtool gobject-introspection-devel pkgconfig(liblzma)
+BuildRequires:  bison autoconf automake libtool gobject-introspection-devel pkgconfig(liblzma) docbook-xsl
 BuildRequires:  pkgconfig(e2p) pkgconfig(zlib) pkgconfig(libcurl) pkgconfig(libsoup-2.4) gpgme-devel
 BuildRequires:  pkgconfig(libselinux) pkgconfig(libcrypto) pkgconfig(fuse) gdb pkgconfig(libsystemd)
-BuildRequires:  dracut openssl-devel pkgconfig(mount) pkgconfig(libarchive)
+BuildRequires:  dracut openssl-devel pkgconfig(mount) pkgconfig(libarchive) python3-pyyaml libxslt
 Requires:       dracut systemd-units gnupg2
 %ifarch x86_64
 Requires: grub2
@@ -34,6 +34,8 @@ Requires: %{name} = %{version}-%{release}
 %description devel
 The %{name}-devel package includes the header files for the %{name} library.
 
+%package_help
+
 %prep
 %autosetup -n lib%{name}-%{version} -p1
 
@@ -46,6 +48,9 @@ env NOCONFIGURE=1 ./autogen.sh
 %install
 %make_install
 %delete_la
+
+%check
+make check
 
 %post
 %systemd_post ostree-remount.service
@@ -79,7 +84,28 @@ env NOCONFIGURE=1 ./autogen.sh
 %{_libdir}/pkgconfig/*
 %{_datadir}/gir-1.0/*.gir
 
+%files help
+%{_mandir}/man*/{ostree,rofiles}*.gz
+
 %changelog
+* Fri Aug 07 2020 wangbin <wangbin272@huawei.com> - 2020.4-1
+- Type:enhancement
+- ID:NA
+- SUG:NA
+- DESC:update ostree to 2020.4
+
+* Sat Mar 21 2020 openEuler Buildteam <buildteam@openeuler.org> - 2019.4-6
+- Type:enhancement
+- ID:NA
+- SUG:NA
+- DESC:add man files into help package
+
+* Tue Feb 11 2020 openEuler Buildteam <buildteam@openeuler.org> - 2019.4-5
+- Type:enhancement
+- ID:NA
+- SUG:NA
+- DESC:enable check
+
 * Sat Oct 19 2019 shenyangyang <shenyangyang4@huawei.com> - 2019.4-4
 - Type:enhancement
 - ID:NA
@@ -92,7 +118,7 @@ env NOCONFIGURE=1 ./autogen.sh
 - SUG:NA
 - DESC:add ostree-libs%{?_isa} that required by flatpak
 
-* Sat Oct 14 2019 shenyangyang <shenyangyang4@huawei.com> - 2019.4-2
+* Mon Oct 14 2019 shenyangyang <shenyangyang4@huawei.com> - 2019.4-2
 - Type: enhancement
 - ID: NA
 - SUG: NA
