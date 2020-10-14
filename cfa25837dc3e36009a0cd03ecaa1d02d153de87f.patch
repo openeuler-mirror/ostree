@@ -1,0 +1,95 @@
+diff --git a/Makefile-libostree.am b/Makefile-libostree.am
+index 96b9249b9..a180e86b2 100644
+--- a/Makefile-libostree.am
++++ b/Makefile-libostree.am
+@@ -182,9 +182,9 @@ libostree_1_la_SOURCES += \
+ endif # USE_GPGME
+ 
+ symbol_files = $(top_srcdir)/src/libostree/libostree-released.sym
+-if BUILDOPT_IS_DEVEL_BUILD
+-symbol_files += $(top_srcdir)/src/libostree/libostree-devel.sym
+-endif
++#if BUILDOPT_IS_DEVEL_BUILD
++#symbol_files += $(top_srcdir)/src/libostree/libostree-devel.sym
++#endif
+ # http://blog.jgc.org/2007/06/escaping-comma-and-space-in-gnu-make.html
+ wl_versionscript_arg = -Wl,--version-script=
+ EXTRA_DIST += \
+diff --git a/configure.ac b/configure.ac
+index de219eabe..7a2f7ab6b 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -7,7 +7,7 @@ dnl Seed the release notes with `git-shortlog-with-prs <previous-release>..`. Th
+ dnl `git-evtag` to create the tag and push it. Finally, create a GitHub release and attach
+ dnl the tarball from `make dist`.
+ m4_define([year_version], [2020])
+-m4_define([release_version], [7])
++m4_define([release_version], [8])
+ m4_define([package_version], [year_version.release_version])
+ AC_INIT([libostree], [package_version], [walters@verbum.org])
+ is_release_build=no
+diff --git a/src/libostree/libostree-devel.sym b/src/libostree/libostree-devel.sym
+index 341a22a8f..8e8d9c819 100644
+--- a/src/libostree/libostree-devel.sym
++++ b/src/libostree/libostree-devel.sym
+@@ -17,19 +17,9 @@
+   Boston, MA 02111-1307, USA.
+ ***/
+ 
+-LIBOSTREE_2020.7 {
+-global:
+-  /* Add symbols here, and uncomment the bits in
+-   * Makefile-libostree.am to enable this too.
+-   */
+-  ostree_repo_static_delta_execute_offline_with_signature;
+-  ostree_repo_static_delta_verify_signature;
+-  ostree_bootconfig_parser_get_overlay_initrds;
+-  ostree_bootconfig_parser_set_overlay_initrds;
+-  ostree_sysroot_deploy_tree_with_options;
+-  ostree_sysroot_stage_tree_with_options;
+-  ostree_sysroot_stage_overlay_initrd;
+-} LIBOSTREE_2020.4;
++/* Copy the bits below and uncomment the include in Makefile-libostree.am
++   when adding a symbol.
++*/
+ 
+ /* Stub section for the stable release *after* this development one; don't
+  * edit this other than to update the year.  This is just a copy/paste
+diff --git a/src/libostree/libostree-released.sym b/src/libostree/libostree-released.sym
+index e7d985ca8..c154d8c18 100644
+--- a/src/libostree/libostree-released.sym
++++ b/src/libostree/libostree-released.sym
+@@ -622,6 +622,20 @@ global:
+ 
+ /* No new symbols in 2020.6 */
+ 
++LIBOSTREE_2020.7 {
++global:
++  /* Add symbols here, and uncomment the bits in
++   * Makefile-libostree.am to enable this too.
++   */
++  ostree_repo_static_delta_execute_offline_with_signature;
++  ostree_repo_static_delta_verify_signature;
++  ostree_bootconfig_parser_get_overlay_initrds;
++  ostree_bootconfig_parser_set_overlay_initrds;
++  ostree_sysroot_deploy_tree_with_options;
++  ostree_sysroot_stage_tree_with_options;
++  ostree_sysroot_stage_overlay_initrd;
++} LIBOSTREE_2020.4;
++
+ /* NOTE: Only add more content here in release commits!  See the
+  * comments at the top of this file.
+  */
+diff --git a/tests/test-symbols.sh b/tests/test-symbols.sh
+index 697d9ad12..e4a0a943a 100755
+--- a/tests/test-symbols.sh
++++ b/tests/test-symbols.sh
+@@ -66,7 +66,7 @@ echo 'ok documented symbols'
+ 
+ # ONLY update this checksum in release commits!
+ cat > released-sha256.txt <<EOF
+-f341345be2da30ab8043ac3d555f75edaae25aaad9f81a933fb4e33a47fe7cc4  ${released_syms}
++540ee37ff081a8649fd1b1fa3cf1b80f7b8abb01f6ba71eead0b3b828d6cb696  ${released_syms}
+ EOF
+ sha256sum -c released-sha256.txt
+ 
