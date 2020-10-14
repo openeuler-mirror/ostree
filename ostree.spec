@@ -1,12 +1,14 @@
 Name:           ostree
 Version:        2020.4
-Release:        2
+Release:        3
 Summary:        A tool like git for operating system binaries
 License:        LGPLv2+
 URL:            https://ostree.readthedocs.io/en/latest/
 Source0:        https://github.com/ostreedev/%{name}/releases/download/v%{version}/libostree-%{version}.tar.xz
 
 Patch1:         Do-not-run-testcase-test-libarvhive-import-because-selinux-is-off.patch
+Patch6000: cfa25837dc3e36009a0cd03ecaa1d02d153de87f.patch
+Patch6001: 26b98ebc56591846e1ab9261eda405232831e8e1.patch
 
 BuildRequires:  bison autoconf automake libtool gobject-introspection-devel pkgconfig(liblzma) docbook-xsl
 BuildRequires:  pkgconfig(e2p) pkgconfig(zlib) pkgconfig(libcurl) pkgconfig(libsoup-2.4) gpgme-devel
@@ -90,6 +92,9 @@ make check
 %{_mandir}/man*/{ostree,rofiles}*.gz
 
 %changelog
+* 20201014163521784273 patch-tracking 2020.4-3
+- append patch file of upstream repository from <cfa25837dc3e36009a0cd03ecaa1d02d153de87f> to <26b98ebc56591846e1ab9261eda405232831e8e1>
+
 * Wed Aug 12 2020 yangzhuangzhuang <yangzhuangzhuang1@huawei.com> - 2020.4-2
 - Type:bugfix
 - ID:NA
