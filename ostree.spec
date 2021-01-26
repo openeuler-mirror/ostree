@@ -1,6 +1,6 @@
 Name:           ostree
-Version:        2020.4
-Release:        2
+Version:        2020.8
+Release:        1
 Summary:        A tool like git for operating system binaries
 License:        LGPLv2+
 URL:            https://ostree.readthedocs.io/en/latest/
@@ -90,6 +90,12 @@ make check
 %{_mandir}/man*/{ostree,rofiles}*.gz
 
 %changelog
+* Mon Jan 25 2021 zoulin <zoulin13@huawei.com> - 2020.8-1
+- Type:enhancement
+- ID:NA
+- SUG:NA
+- DESC:update ostree to 2020.8
+
 * Wed Aug 12 2020 yangzhuangzhuang <yangzhuangzhuang1@huawei.com> - 2020.4-2
 - Type:bugfix
 - ID:NA
