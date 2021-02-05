@@ -1,12 +1,13 @@
 Name:           ostree
 Version:        2020.8
-Release:        1
+Release:        2
 Summary:        A tool like git for operating system binaries
 License:        LGPLv2+
 URL:            https://ostree.readthedocs.io/en/latest/
 Source0:        https://github.com/ostreedev/%{name}/releases/download/v%{version}/libostree-%{version}.tar.xz
 
 Patch1:         Do-not-run-testcase-test-libarvhive-import-because-selinux-is-off.patch
+Patch2:         backport-test-pull-summary-sigs-Set-timestamps-to-serve-expected.patch
 
 BuildRequires:  bison autoconf automake libtool gobject-introspection-devel pkgconfig(liblzma) docbook-xsl
 BuildRequires:  pkgconfig(e2p) pkgconfig(zlib) pkgconfig(libcurl) pkgconfig(libsoup-2.4) gpgme-devel
@@ -90,6 +91,12 @@ make check
 %{_mandir}/man*/{ostree,rofiles}*.gz
 
 %changelog
+* Fri Feb 5 2021 panxiaohe <panxiaohe@huawei.com> - 2020.8-2
+- Type:bugfix
+- ID:NA
+- SUG:NA
+- DESC:fix failed tests about test-pull-summary-sigs.sh 
+
 * Mon Jan 25 2021 zoulin <zoulin13@huawei.com> - 2020.8-1
 - Type:enhancement
 - ID:NA
