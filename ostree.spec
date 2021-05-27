@@ -1,10 +1,12 @@
 Name:           ostree
 Version:        2020.4
-Release:        1
+Release:        2
 Summary:        A tool like git for operating system binaries
 License:        LGPLv2+
 URL:            https://ostree.readthedocs.io/en/latest/
 Source0:        https://github.com/ostreedev/%{name}/releases/download/v%{version}/libostree-%{version}.tar.xz
+
+Patch1:         Do-not-run-testcase-test-libarvhive-import-because-selinux-is-off.patch
 
 BuildRequires:  bison autoconf automake libtool gobject-introspection-devel pkgconfig(liblzma) docbook-xsl
 BuildRequires:  pkgconfig(e2p) pkgconfig(zlib) pkgconfig(libcurl) pkgconfig(libsoup-2.4) gpgme-devel
@@ -88,6 +90,12 @@ make check
 %{_mandir}/man*/{ostree,rofiles}*.gz
 
 %changelog
+* Thu May 27 2021 wulei <wulei80@huawei.com> - 2020.4-2
+- Type:bugfix
+- ID:NA
+- SUG:NA
+- DESC:Do not run testcase test-libarchive-import, because selinux is off.
+
 * Fri Aug 07 2020 wangbin <wangbin272@huawei.com> - 2020.4-1
 - Type:enhancement
 - ID:NA
