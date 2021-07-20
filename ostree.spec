@@ -1,6 +1,6 @@
 Name:           ostree
 Version:        2020.8
-Release:        2
+Release:        3
 Summary:        A tool like git for operating system binaries
 License:        LGPLv2+
 URL:            https://ostree.readthedocs.io/en/latest/
@@ -11,7 +11,7 @@ Patch2:         backport-test-pull-summary-sigs-Set-timestamps-to-serve-expected
 
 BuildRequires:  bison autoconf automake libtool gobject-introspection-devel pkgconfig(liblzma) docbook-xsl
 BuildRequires:  pkgconfig(e2p) pkgconfig(zlib) pkgconfig(libcurl) pkgconfig(libsoup-2.4) gpgme-devel
-BuildRequires:  pkgconfig(libselinux) pkgconfig(libcrypto) pkgconfig(fuse) gdb pkgconfig(libsystemd)
+BuildRequires:  pkgconfig(libselinux) pkgconfig(libcrypto) pkgconfig(fuse) pkgconfig(libsystemd)
 BuildRequires:  dracut openssl-devel pkgconfig(mount) pkgconfig(libarchive) python3-pyyaml libxslt
 Requires:       dracut systemd-units gnupg2
 %ifarch x86_64
@@ -91,6 +91,12 @@ make check
 %{_mandir}/man*/{ostree,rofiles}*.gz
 
 %changelog
+* Tue Jul 20 2021 wangchen <wangchen137@huawei.com> - 2020.8-3
+- Type:bugfix
+- ID:NA
+- SUG:NA
+- DESC:Delete unnecessary gdb from BuildRequires
+
 * Fri Feb 5 2021 panxiaohe <panxiaohe@huawei.com> - 2020.8-2
 - Type:bugfix
 - ID:NA
