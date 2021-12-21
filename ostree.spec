@@ -1,6 +1,6 @@
 Name:           ostree
 Version:        2020.8
-Release:        3
+Release:        4
 Summary:        A tool like git for operating system binaries
 License:        LGPLv2+
 URL:            https://ostree.readthedocs.io/en/latest/
@@ -12,7 +12,7 @@ Patch2:         backport-test-pull-summary-sigs-Set-timestamps-to-serve-expected
 BuildRequires:  bison autoconf automake libtool gobject-introspection-devel pkgconfig(liblzma) docbook-xsl
 BuildRequires:  pkgconfig(e2p) pkgconfig(zlib) pkgconfig(libcurl) pkgconfig(libsoup-2.4) gpgme-devel
 BuildRequires:  pkgconfig(libselinux) pkgconfig(libcrypto) pkgconfig(fuse) pkgconfig(libsystemd)
-BuildRequires:  dracut openssl-devel pkgconfig(mount) pkgconfig(libarchive) python3-pyyaml libxslt
+BuildRequires:  dracut openssl-devel pkgconfig(mount) pkgconfig(libarchive) python3-pyyaml libxslt gtk-doc
 Requires:       dracut systemd-units gnupg2
 %ifarch x86_64
 Requires: grub2
@@ -91,6 +91,9 @@ make check
 %{_mandir}/man*/{ostree,rofiles}*.gz
 
 %changelog
+* Tue Dec 21 2021 Chenxi Mao <chenxi.mao@suse.com> - 2020.8-4
+- ostree: add missing gtk-doc to fix build error.
+
 * Tue Jul 20 2021 wangchen <wangchen137@huawei.com> - 2020.8-3
 - Type:bugfix
 - ID:NA
