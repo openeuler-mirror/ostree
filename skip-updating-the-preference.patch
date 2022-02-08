@@ -1,0 +1,25 @@
+From fb7daae318b4bec222c166578566ac2945c638a2 Mon Sep 17 00:00:00 2001
+From: wangjie <wangejie375@h-partners.com>
+Date: Mon, 20 Dec 2021 11:04:00 +0800
+Subject: [PATCH] skip updating the preference
+
+---
+ tests/test-remote-gpg-list-keys.sh | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/tests/test-remote-gpg-list-keys.sh b/tests/test-remote-gpg-list-keys.sh
+index 51b6008..ffb7850 100755
+--- a/tests/test-remote-gpg-list-keys.sh
++++ b/tests/test-remote-gpg-list-keys.sh
+@@ -127,7 +127,7 @@ else
+     # implicitly migrated to the newer format, but this test hasn't
+     # signed anything, so the private keys haven't been loaded. Force
+     # the migration by listing the private keys.
+-    ${GPG} --homedir=${test_tmpdir}/gpghome -K >/dev/null
++    ${GPG} --homedir=${test_tmpdir}/gpghome -K --batch >/dev/null
+ 
+     # Expire key1, wait for it to be expired and re-import it.
+     ${GPG} --homedir=${test_tmpdir}/gpghome --quick-set-expire ${TEST_GPG_KEYFPR_1} seconds=1
+-- 
+1.8.3.1
+
