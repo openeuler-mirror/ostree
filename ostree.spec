@@ -1,18 +1,19 @@
 Name:           ostree
-Version:        2020.8
-Release:        3
+Version:        2021.6
+Release:        1
 Summary:        A tool like git for operating system binaries
 License:        LGPLv2+
 URL:            https://ostree.readthedocs.io/en/latest/
 Source0:        https://github.com/ostreedev/%{name}/releases/download/v%{version}/libostree-%{version}.tar.xz
 
-Patch1:         Do-not-run-testcase-test-libarvhive-import-because-selinux-is-off.patch
-Patch2:         backport-test-pull-summary-sigs-Set-timestamps-to-serve-expected.patch
+Patch9000:      Do-not-run-testcase-test-libarvhive-import-because-selinux-is-off.patch
+Patch9001:      skip-updating-the-preference.patch
 
 BuildRequires:  bison autoconf automake libtool gobject-introspection-devel pkgconfig(liblzma) docbook-xsl
 BuildRequires:  pkgconfig(e2p) pkgconfig(zlib) pkgconfig(libcurl) pkgconfig(libsoup-2.4) gpgme-devel
 BuildRequires:  pkgconfig(libselinux) pkgconfig(libcrypto) pkgconfig(fuse) pkgconfig(libsystemd)
 BuildRequires:  dracut openssl-devel pkgconfig(mount) pkgconfig(libarchive) python3-pyyaml libxslt
+BuildRequires:  gtk-doc
 Requires:       dracut systemd-units gnupg2
 %ifarch x86_64
 Requires: grub2
@@ -91,6 +92,12 @@ make check
 %{_mandir}/man*/{ostree,rofiles}*.gz
 
 %changelog
+* Tue Feb 8 2022 yangzhuangzhuang <yangzhuangzhuang1@h-partners.com> - 2021.6-1
+- Type:enhancement
+- ID:NA
+- SUG:NA
+- DESC:update ostree to 2021.6
+
 * Tue Jul 20 2021 wangchen <wangchen137@huawei.com> - 2020.8-3
 - Type:bugfix
 - ID:NA
