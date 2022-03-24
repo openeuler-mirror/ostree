@@ -1,5 +1,5 @@
 Name:           ostree
-Version:        2021.6
+Version:        2022.2
 Release:        1
 Summary:        A tool like git for operating system binaries
 License:        LGPLv2+
@@ -92,6 +92,12 @@ make check
 %{_mandir}/man*/{ostree,rofiles}*.gz
 
 %changelog
+* Thu Mar 24 2022 Jiacheng Zhou <jchzhou@outlook.com> - 2022.2-1
+- Type:enhancement
+- ID:NA
+- SUG:NA
+- DESC:update ostree to 2022.2
+
 * Tue Feb 8 2022 yangzhuangzhuang <yangzhuangzhuang1@h-partners.com> - 2021.6-1
 - Type:enhancement
 - ID:NA
