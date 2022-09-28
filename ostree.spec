@@ -1,6 +1,6 @@
 Name:           ostree
 Version:        2021.6
-Release:        1
+Release:        2
 Summary:        A tool like git for operating system binaries
 License:        LGPLv2+
 URL:            https://ostree.readthedocs.io/en/latest/
@@ -14,6 +14,7 @@ BuildRequires:  pkgconfig(e2p) pkgconfig(zlib) pkgconfig(libcurl) pkgconfig(libs
 BuildRequires:  pkgconfig(libselinux) pkgconfig(libcrypto) pkgconfig(fuse) pkgconfig(libsystemd)
 BuildRequires:  dracut openssl-devel pkgconfig(mount) pkgconfig(libarchive) python3-pyyaml libxslt
 BuildRequires:  gtk-doc
+BuildRequires:  elfutils-extra
 Requires:       dracut systemd-units gnupg2
 %ifarch x86_64
 Requires: grub2
@@ -58,7 +59,7 @@ make check
 
 %post
 %systemd_post ostree-remount.service
- 
+
 %preun
 %systemd_preun ostree-remount.service
 
@@ -92,6 +93,12 @@ make check
 %{_mandir}/man*/{ostree,rofiles}*.gz
 
 %changelog
+* Wed Sep 28 2022 zhangruifang2020 <zhangruifang1@h-partners.com> - 2021.6-2
+- Type:bugfix
+- ID:NA
+- SUG:NA
+- DESC:fix failed tests about test-symbols.sh
+
 * Tue Feb 8 2022 yangzhuangzhuang <yangzhuangzhuang1@h-partners.com> - 2021.6-1
 - Type:enhancement
 - ID:NA
