@@ -1,6 +1,6 @@
 Name:           ostree
 Version:        2020.4
-Release:        1
+Release:        2
 Summary:        A tool like git for operating system binaries
 License:        LGPLv2+
 URL:            https://ostree.readthedocs.io/en/latest/
@@ -10,6 +10,7 @@ BuildRequires:  bison autoconf automake libtool gobject-introspection-devel pkgc
 BuildRequires:  pkgconfig(e2p) pkgconfig(zlib) pkgconfig(libcurl) pkgconfig(libsoup-2.4) gpgme-devel
 BuildRequires:  pkgconfig(libselinux) pkgconfig(libcrypto) pkgconfig(fuse) gdb pkgconfig(libsystemd)
 BuildRequires:  dracut openssl-devel pkgconfig(mount) pkgconfig(libarchive) python3-pyyaml libxslt
+BuildRequires:  elfutils-extra
 Requires:       dracut systemd-units gnupg2
 %ifarch x86_64
 Requires: grub2
@@ -88,6 +89,12 @@ make check
 %{_mandir}/man*/{ostree,rofiles}*.gz
 
 %changelog
+* Mon Oct 17 2022 yangmingtai <yangmingtai@huawei.com> - 2020.4-2
+- Type:bugfix
+- ID:NA
+- SUG:NA
+- DESC:add Buildrequires elfutils-extra
+
 * Fri Aug 07 2020 wangbin <wangbin272@huawei.com> - 2020.4-1
 - Type:enhancement
 - ID:NA
