@@ -128,7 +128,7 @@ make check
 - SUG:NA
 - DESC:DO not run testcase test-libarchive-import,because selinux is off.
 
-* Mon Jul 25 2020 linwei <linwei54@huawei.com> - 2020.4-1
+* Sat Jul 25 2020 linwei <linwei54@huawei.com> - 2020.4-1
 - Type:enhancement
 - ID:NA
 - SUG:NA
