@@ -1,0 +1,47 @@
+From a01cca16d6d3aa5abddb9ccf3ae9bc6103aa06dc Mon Sep 17 00:00:00 2001
+From: jiangchuangang <jiangchuangang@huawei.com>
+Date: Sun, 29 Jan 2023 16:35:57 +0800
+Subject: [PATCH] skip if /etc/mtab isn't a symlink of /proc/self/mounts
+
+see:
+https://gitee.com/src-openeuler/ostree/issues/I66KR6?from=project-issue
+---
+ tests/test-demo-buildsystem.sh | 5 +++++
+ tests/test-rofiles-fuse.sh     | 5 +++++
+ 2 files changed, 10 insertions(+)
+
+diff --git a/tests/test-demo-buildsystem.sh b/tests/test-demo-buildsystem.sh
+index 2dc78dc..56b6e61 100755
+--- a/tests/test-demo-buildsystem.sh
++++ b/tests/test-demo-buildsystem.sh
+@@ -21,6 +21,11 @@ set -euo pipefail
+ 
+ . $(dirname $0)/libtest.sh
+ 
++if [ ! -L /etc/mtab ]
++then
++    skip "skip if /etc/mtab isn't a symlink of /proc/self/mounts"
++fi
++
+ skip_without_fuse
+ skip_without_user_xattrs
+ 
+diff --git a/tests/test-rofiles-fuse.sh b/tests/test-rofiles-fuse.sh
+index a56a76c..87962ce 100755
+--- a/tests/test-rofiles-fuse.sh
++++ b/tests/test-rofiles-fuse.sh
+@@ -21,6 +21,11 @@ set -euo pipefail
+ 
+ . $(dirname $0)/libtest.sh
+ 
++if [ ! -L /etc/mtab ]
++then
++    skip "skip if /etc/mtab isn't a symlink of /proc/self/mounts"
++fi
++
+ skip_without_fuse
+ skip_without_user_xattrs
+ 
+-- 
+2.27.0
+

@@ -1,6 +1,7 @@
+#needsrootforbuild
 Name:           ostree
-Version:        2021.6
-Release:        2
+Version:        2022.7
+Release:        1
 Summary:        A tool like git for operating system binaries
 License:        LGPLv2+
 URL:            https://ostree.readthedocs.io/en/latest/
@@ -8,6 +9,7 @@ Source0:        https://github.com/ostreedev/%{name}/releases/download/v%{versio
 
 Patch9000:      Do-not-run-testcase-test-libarvhive-import-because-selinux-is-off.patch
 Patch9001:      skip-updating-the-preference.patch
+Patch9002:      skip-if-etc-mtab-is-not-a-symlink-of-proc-self-mounts.patch
 
 BuildRequires:  bison autoconf automake libtool gobject-introspection-devel pkgconfig(liblzma) docbook-xsl
 BuildRequires:  pkgconfig(e2p) pkgconfig(zlib) pkgconfig(libcurl) pkgconfig(libsoup-2.4) gpgme-devel
@@ -92,6 +94,13 @@ make check
 %{_mandir}/man*/{ostree,rofiles}*.gz
 
 %changelog
+* Sun Jan 29 2023 jiangchuangang <jiangchuangang@huawei.com> - 2022.7-1
+- Type:enhancement
+- ID:NA
+- SUG:NA
+- DESC:update to 2022.7
+  add skip-if-etc-mtab-is-not-a-symlink-of-proc-self-mounts.patch for test failed
+
 * Mon Oct 17 2022 yangmingtai <yangmingtai@huawei.com> - 2021.6-2
 - Type:bugfix
 - ID:NA
